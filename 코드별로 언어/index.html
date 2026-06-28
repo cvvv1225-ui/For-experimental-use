@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Developer Language System (Real-time Translation)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <div id="selection-screen" class="screen active">
+            <header>
+                <h1 id="ui-main-title">🌍 글로벌 개발자 언어 매칭 시스템</h1>
+                <p id="ui-main-desc">원하는 프로그래밍 언어와 인터페이스 언어를 선택한 후 아래의 확인 버튼을 눌러주세요.</p>
+            </header>
+
+            <main class="panels-container">
+                <section class="panel">
+                    <h2 id="ui-prog-title">💻 프로그래밍 언어 (A-Z)</h2>
+                    <ul id="prog-list" class="lang-list">
+                        <li data-value="Bash">Bash</li>
+                        <li data-value="C">C</li>
+                        <li data-value="C++">C++</li>
+                        <li data-value="C#">C#</li>
+                        <li data-value="Clojure">Clojure</li>
+                        <li data-value="COBOL">COBOL</li>
+                        <li data-value="D">D</li>
+                        <li data-value="Elixir">Elixir</li>
+                        <li data-value="Erlang">Erlang</li>
+                        <li data-value="F#">F#</li>
+                        <li data-value="Fortran">Fortran</li>
+                        <li data-value="Go">Go</li>
+                        <li data-value="Groovy">Groovy</li>
+                        <li data-value="Haskell">Haskell</li>
+                        <li data-value="Java">Java</li>
+                        <li data-value="JavaScript">JavaScript</li>
+                        <li data-value="Kotlin">Kotlin</li>
+                        <li data-value="Lua">Lua</li>
+                        <li data-value="OCaml">OCaml</li>
+                        <li data-value="Octave">Octave</li>
+                        <li data-value="Pascal">Pascal</li>
+                        <li data-value="Perl">Perl</li>
+                        <li data-value="PHP">PHP</li>
+                        <li data-value="Python">Python</li>
+                        <li data-value="R">R</li>
+                        <li data-value="Ruby">Ruby</li>
+                        <li data-value="Rust">Rust</li>
+                        <li data-value="Scala">Scala</li>
+                        <li data-value="SQL">SQL</li>
+                        <li data-value="Swift">Swift</li>
+                        <li data-value="TypeScript">TypeScript</li>
+                        <li data-value="VB.NET">VB.NET</li>
+                    </ul>
+                </section>
+
+                <section class="panel">
+                    <h2 id="ui-human-title">🗣️ 인터페이스 언어 (가나다순)</h2>
+                    <ul id="human-list" class="lang-list">
+                        <li data-value="독일어">독일어 (Deutsch)</li>
+                        <li data-value="러시아어">러시아어 (Русский)</li>
+                        <li data-value="미얀마어">미얀마어 (မြန်မာဘာသာ)</li>
+                        <li data-value="베트남어">베트남어 (Tiếng Việt)</li>
+                        <li data-value="스페인어">스페인어 (Español)</li>
+                        <li data-value="영어">영어 (English)</li>
+                        <li data-value="일본어">일본어 (日本語)</li>
+                        <li data-value="중국어">중국어 (中文)</li>
+                        <li data-value="프랑스어">프랑스어 (Français)</li>
+                        <li data-value="한국어">한국어</li>
+                    </ul>
+                </section>
+            </main>
+
+            <div class="action-area">
+                <button id="confirm-btn" disabled>확인 및 코드 생성</button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <header>
+                <h1 id="result-title">🚀 환경 설정 완료</h1>
+                <p id="result-subtitle">선택하신 환경에 맞는 기본 시작 코드(Boilerplate)입니다.</p>
+            </header>
+
+            <main class="result-container">
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span id="code-filename" class="filename">main.py</span>
+                    </div>
+                    <pre><code id="code-display"></code></pre>
+                </div>
+            </main>
+
+            <div class="action-area">
+                <button id="back-btn" class="secondary-btn">이전 화면으로</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

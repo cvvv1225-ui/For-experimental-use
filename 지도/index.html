@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>지도 만들기</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v2.3.0/maptiler-sdk.css" rel="stylesheet" />
+    
+    <style>
+        body, html { height: 100%; margin: 0; padding: 0; }
+        #map { height: 100vh; width: 100%; }
+
+        /* 설정창 스타일 */
+        #settings-panel {
+            position: absolute; top: 20px; left: 20px; z-index: 1000;
+            background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        /* 줌 컨트롤(확대/축소) 위치 조정 */
+        .leaflet-top.leaflet-left {
+            margin-top: 80px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div id="settings-panel">
+        <label>언어 선택: </label>
+        <select id="langSelect" onchange="changeLanguage()">
+            <option value="ko">한국어</option>
+            <option value="ja">日本語</option>
+        </select>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.3.0/maptiler-sdk.umd.js"></script>
+    <script src="https://cdn.maptiler.com/leaflet-maptilersdk/v2.0.0/leaflet-maptilersdk.js"></script>
+    
+    <script>
+        // 1. 한국과 일본을 모두 포함하는 가상의 네모난 상자(경계) 좌표 설정
+        // 포맷: [[남쪽 위도, 서쪽 경도], [북쪽 위도, 동쪽 경도]]
+        var mapBounds = [
+            [24.0, 122.0], // 오키나와/대만 근처 (남서쪽 끝)
+            [46.0, 147.0]  // 홋카이도 북쪽 (북동쪽 끝)
+        ];
+
+        // 2. 지도 생성 시 제한 옵션 추가
+        var map = L.map('map', { 
+            zoomControl: false,
+            maxBounds: mapBounds,         // 설정한 영역 밖으로 드래그 이동 불가
+            maxBoundsViscosity: 1.0,      // 영역 밖으로 튕겨 나가지 않게 꽉 잡아줌
+            minZoom: 5                    // 5 이하로 축소 불가 (전 세계 지도를 불러오는 것 방지)
+        }).setView([36.5, 127.5], 6);
+        
+        L.control.zoom({ position: 'topleft' }).addTo(map);
+        
+        var key = 'oMU2cWvX1tUTesSZZMXG';
+        
+        // 벡터 레이어 추가
+        var mtLayer = new L.MaptilerLayer({
+            apiKey: key,
+            style: L.MaptilerStyle.STREETS
+        }).addTo(map);
+
+        mtLayer.on("ready", function() {
+            mtLayer.setLanguage(L.MaptilerLanguage.KOREAN);
+        });
+
+        // 언어 변경 함수
+        function changeLanguage() {
+            var lang = document.getElementById('langSelect').value;
+            if (lang === 'ko') {
+                mtLayer.setLanguage(L.MaptilerLanguage.KOREAN);
+            } else if (lang === 'ja') {
+                mtLayer.setLanguage(L.MaptilerLanguage.JAPANESE);
+            }
+        }
+    </script>
+</body>
+</html>
